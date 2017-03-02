@@ -14,8 +14,20 @@ def create
   @article = Article.new(article_params)
   @article.save
 
-  # what to do after save? needs to redirect to show
-  redirect_to articles_show(@article)
+
+  if @article.save
+    flash[:notice] = "Article was successfully created"
+    # what to do after save? needs to redirect to show
+    redirect_to article_path(@article)
+  else
+    render 'new'
+  end
+end
+
+def show
+  # show the article just created by id
+  @article = Article.find(params[:id])
+
 end
 
 private
