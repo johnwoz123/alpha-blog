@@ -35,6 +35,13 @@ def show
 
 end
 
+def destroy
+  @article = Article.find(params[:id])
+  @article.destroy
+  flash[:notice]  = "Article was successfully deleted"
+  redirect_to articles_path
+end
+
 def edit
   # When adding article you need to find article by id
 @article = Article.find(params[:id])
@@ -52,6 +59,8 @@ def update
   end
 
 end
+
+
 
 private
 def article_params
