@@ -1,5 +1,11 @@
 class ArticlesController < ApplicationController
 
+def index
+  @articles = Article.all
+
+end
+
+
 def new
   @article = Article.new
 
@@ -9,7 +15,6 @@ end
 def create
   # render plain: params[:article].inspect -- this is what is being passed in the params hash
   # create a new article from what is coming in from the params hash - must white list first
-
 
   @article = Article.new(article_params)
   @article.save
@@ -27,6 +32,24 @@ end
 def show
   # show the article just created by id
   @article = Article.find(params[:id])
+
+end
+
+def edit
+  # When adding article you need to find article by id
+@article = Article.find(params[:id])
+
+# this is handled by the update function
+end
+
+def update
+  @article = Article.find(params[:id])
+  if @article.update(article_params)
+    flash[:notice] = "Article was successfully updated"
+    redirect_to article_path(@article)
+  else
+    render 'edit'
+  end
 
 end
 
