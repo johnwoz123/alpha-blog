@@ -19,6 +19,7 @@ def create
   # create a new article from what is coming in from the params hash - must white list first
 
   @article = Article.new(article_params)
+  @article.user = User.first
   if @article.save
     flash[:success] = "Article was successfully created"
     # what to do after save? needs to redirect to show
@@ -30,7 +31,6 @@ end
 
 def show
   # show the article just created by id
-
 end
 
 def destroy
